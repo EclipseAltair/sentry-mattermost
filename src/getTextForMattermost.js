@@ -24,10 +24,10 @@ const configFields = [
   { fieldName: "project", labelName: "Проект" },
   { fieldName: "environment", labelName: "Окружение" },
   { fieldName: "title", labelName: "Название" },
-  { fieldName: "action", labelName: "Действие" },
-  { fieldName: "web_url", labelName: "Ссылка на Sentry" },
-  { fieldName: "status", labelName: "Статус" },
-  { fieldName: "message", labelName: "Описание(message)" },
+  { fieldName: "message", labelName: "Описание" },
+  { fieldName: "web_url", labelName: "Ссылка" },
+//  { fieldName: "action", labelName: "Действие" },
+//  { fieldName: "status", labelName: "Статус" },
 ];
 
 /** Формируем сообщение для Mattermost */
