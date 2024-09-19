@@ -10,8 +10,8 @@ const getDataFromRequest = (reqBody) => {
 
 /** Маппинг id проектов и названий */
 const mapProjects = {
-    1: "farfor-erp",
-    2: "farfor-site",
+    2: "farfor-erp",
+    3: "farfor-site",
     7: "calls-backend",
     9: "dispatch",
     11: "newsletters-backend",
