@@ -7,7 +7,7 @@
 module.exports = function findDeepValue(obj, key) {
   // Проверяем, есть ли ключ в текущем объекте
   console.log("findDeepValue obj", obj);
-  if (obj.hasOwnProperty(key)) {
+  if (obj?.hasOwnProperty(key)) {
     return obj[key];
   }
 
