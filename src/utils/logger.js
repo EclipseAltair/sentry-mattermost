@@ -12,9 +12,9 @@ const logger = createLogger({
     prettyPrint()
   ),
   transports: [
-    new transports.File({
-      filename: "logs/all.log",
-    }),
+//    new transports.File({
+//      filename: "logs/all.log",
+//    }),
     new transports.File({
       level: "error",
       filename: "logs/error.log",

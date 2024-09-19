@@ -9,6 +9,7 @@ const getDataFromRequest = (reqBody) => {
 };
 /** Sentry кидает объект ошибки, fieldName это нужны поля из этого объекта; */
 const configFields = [
+  { fieldName: "project", labelName: "Проект" },
   { fieldName: "environment", labelName: "Окружение" },
   { fieldName: "title", labelName: "Название" },
   { fieldName: "action", labelName: "Действие" },
@@ -37,7 +38,7 @@ module.exports = getTextForMattermost = ({ headers, body }) => {
       message += `###### Название ресурса: ${resource}`;
     }
 
-    return `#### Ошибка в анкете, подробности ниже:\n ${message}`;
+    return `#### ${message}`;
   } catch (error) {
     logger.error("Ошибка в методе getTextForMattermost", error);
     return (
