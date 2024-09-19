@@ -42,7 +42,7 @@ module.exports = getTextForMattermost = ({ headers, body }) => {
     logger.error("Ошибка в методе getTextForMattermost", error);
     return (
       `#### Ошибка в адапторе:\nЧто-то сломалось в методе getTextForMattermost, проверьте логи на сервере адаптера ` +
-      error?.message
+      error.message
     );
   }
 };
