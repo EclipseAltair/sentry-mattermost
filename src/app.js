@@ -13,7 +13,12 @@ app.use(bodyParser.json());
 
 app.post("/webhook", ({ headers, body }) => {
   try {
-    axios.post(URL_WEBHOOK, { text: getTextForMattermost({ headers, body }) });
+    const { message, channel } = getTextForMattermost({ headers, body });
+
+    axios.post(URL_WEBHOOK, {
+        text: message,
+        channel: `sentry-${channel}`
+    });
   } catch (err) {
     logger.error("Ошибка при отправке в Mattermost", error);
   }

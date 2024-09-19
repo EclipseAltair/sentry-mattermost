@@ -41,12 +41,15 @@ module.exports = getTextForMattermost = ({ headers, body }) => {
     const getFieldFromData = getDataFromRequest(body);
 
     let message = "";
+    let projectName = "";
+
     configFields.forEach((item) => {
       let value = getFieldFromData(item.fieldName);
 
       // Если поле project, то заменяем ID на название проекта
       if (item.fieldName === "project" && value && mapProjects[value]) {
         value = mapProjects[value]; // подставляем название проекта вместо ID
+        projectName = value;
       }
 
       if (value) {
@@ -58,12 +61,15 @@ module.exports = getTextForMattermost = ({ headers, body }) => {
       message += `###### Название ресурса: ${resource}`;
     }
 
-    return `${message}`;
+    return {
+        message,
+        projectName
+    };
   } catch (error) {
     logger.error("Ошибка в методе getTextForMattermost", error);
-    return (
-      `#### Ошибка в адапторе:\nЧто-то сломалось в методе getTextForMattermost, проверьте логи на сервере адаптера ` +
-      error?.message
-    );
+    return {
+      `#### Ошибка в адапторе:\nЧто-то сломалось в методе getTextForMattermost, проверьте логи на сервере адаптера ${error?.message}`,
+      "unknown"
+    };
   }
 };
