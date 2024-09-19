@@ -1,18 +1,18 @@
 const findDeepValue = require("./utils/findDeepValue");
 const logger = require("./utils/logger");
 
-/** Замкнули обьект с данными, для удобного получения нужных полей из этого обьекта на любом уровне вложенности; */
+/** Замкнули объект с данными, для удобного получения нужных полей из этого объекта на любом уровне вложенности; */
 const getDataFromRequest = (reqBody) => {
   return (fieldName) => {
     return findDeepValue(reqBody, fieldName);
   };
 };
-/** Sentry кидает обьект ошибки, fieldName это нужны поля из этого обьекта; */
+/** Sentry кидает объект ошибки, fieldName это нужны поля из этого объекта; */
 const configFields = [
   { fieldName: "environment", labelName: "Окружение" },
   { fieldName: "title", labelName: "Название" },
   { fieldName: "action", labelName: "Действие" },
-  { fieldName: "web_url", labelName: "Сслыка на Sentry" },
+  { fieldName: "web_url", labelName: "Ссылка на Sentry" },
   { fieldName: "status", labelName: "Статус" },
   { fieldName: "message", labelName: "Описание(message)" },
 ];
