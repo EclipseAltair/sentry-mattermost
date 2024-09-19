@@ -16,7 +16,7 @@ app.post("/webhook", ({ headers, body }) => {
     const { message, channel } = getTextForMattermost({ headers, body });
 
     axios.post(URL_WEBHOOK, {
-        username: "Sentry"
+        username: "Sentry",
         text: message,
         channel: `sentry-${channel}`
     });
