@@ -7,7 +7,19 @@ const getDataFromRequest = (reqBody) => {
     return findDeepValue(reqBody, fieldName);
   };
 };
-/** Sentry кидает объект ошибки, fieldName это нужны поля из этого объекта; */
+
+/** Маппинг id проектов и названий */
+const mapProjects = {
+    1: "farfor-erp",
+    2: "farfor-site",
+    7: "calls-backend",
+    9: "dispatch",
+    11: "newsletters-backend",
+    12: "notify",
+    17: "verification-code",
+};
+
+/** Sentry кидает объект ошибки, fieldName это нужные поля из этого объекта; */
 const configFields = [
   { fieldName: "project", labelName: "Проект" },
   { fieldName: "environment", labelName: "Окружение" },
@@ -17,6 +29,7 @@ const configFields = [
   { fieldName: "status", labelName: "Статус" },
   { fieldName: "message", labelName: "Описание(message)" },
 ];
+
 /** Формируем сообщение для Mattermost */
 module.exports = getTextForMattermost = ({ headers, body }) => {
   try {
@@ -29,16 +42,23 @@ module.exports = getTextForMattermost = ({ headers, body }) => {
 
     let message = "";
     configFields.forEach((item) => {
-      const value = getFieldFromData(item.fieldName);
+      let value = getFieldFromData(item.fieldName);
+
+      // Если поле project, то заменяем ID на название проекта
+      if (item.fieldName === "project" && value && mapProjects[value]) {
+        value = mapProjects[value]; // подставляем название проекта вместо ID
+      }
+
       if (value) {
         message += `###### ${item.labelName}: ${value}\n`;
       }
     });
+
     if (resource) {
       message += `###### Название ресурса: ${resource}`;
     }
 
-    return `#### ${message}`;
+    return `${message}`;
   } catch (error) {
     logger.error("Ошибка в методе getTextForMattermost", error);
     return (
