@@ -62,14 +62,14 @@ module.exports = getTextForMattermost = ({ headers, body }) => {
     }
 
     return {
-        message,
-        projectName
+        message: message,
+        channel: projectName
     };
   } catch (error) {
     logger.error("Ошибка в методе getTextForMattermost", error);
     return {
-      `#### Ошибка в адапторе:\nЧто-то сломалось в методе getTextForMattermost, проверьте логи на сервере адаптера ${error?.message}`,
-      "unknown"
+      message: `#### Ошибка в адапторе:\nЧто-то сломалось в методе getTextForMattermost, проверьте логи на сервере адаптера ${error?.message}`,
+      channel: "unknown"
     };
   }
 };
